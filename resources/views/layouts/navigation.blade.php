@@ -4,15 +4,17 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
+            <div class="shrink-0 flex items-center gap-3">
+                <x-application-logo class="block h-10 w-auto" />
+
+                <span class="text-3xl font-black tracking-tighter text-[#5F55F8] leading-none mt-1.5">
+                    QuickBite
+                </span>
+            </div>
 
             </div>
 
-            <div class="flex">
+            <div class="flex jcustify-center items-center gap-2">
                 <a href="{{ route('post.create') }}" class="flex items-center">
                     <x-primary-button>
                         Create Post
@@ -64,14 +66,17 @@
 
                 @guest
                     <a href="{{ route('register') }}"
-                        class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4 
+                        rounded-lg active font-medium rounded-md text-white bg-[#5F55F8] hover:bg-[#7A72F9] text-white transition duration-150
+                        hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                         Create an Account
                     </a>
 
                     <a href="{{ route('login') }}"
                         class="hidden sm:flex items-center px-3 py-2 border border-transparent text-sm leading-4
-                         font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition
-                          ease-in-out duration-150">
+                        bg-[#5F55F8] hover:bg-[#7A72F9] text-white transition duration-150 rounded-lg active
+                        font-medium rounded-md text-white hover:text-gray-700 focus:outline-none transition
+                        ease-in-out duration-150">
                         Log in
                     </a>
                 @endguest

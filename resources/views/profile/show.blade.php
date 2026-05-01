@@ -25,7 +25,7 @@
                             <span x-text="followersCount"></span> followers
                         </p>
                         <p>
-                           {{ $user->bio }} 
+                        {{ $user->bio }} 
                         </p>
                         @if (auth()->user() && auth()->user()->id !== $user->id)
                             <div class="mt-4">

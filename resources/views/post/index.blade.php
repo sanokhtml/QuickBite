@@ -3,6 +3,7 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Популярні категорії</h2>
                     <x-category-tabs>
                         No Caregories
                     </x-category-tabs>
