@@ -15,6 +15,18 @@
             </div>
 
             <div class="flex jcustify-center items-center gap-2">
+                <a href="{{ route('restaurant.create') }}" class="flex items-center">
+                    <x-primary-button>
+                        Create Restaurant
+                    </x-primary-button>
+                </a>
+
+                <a href="{{ route('product.create') }}" class="flex items-center">
+                    <x-primary-button>
+                        Create Product
+                    </x-primary-button>
+                </a>
+
                 <a href="{{ route('post.create') }}" class="flex items-center">
                     <x-primary-button>
                         Create Post

@@ -1,27 +1,24 @@
 <x-app-layout>
     <div class="py-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <h2 class="text-xl font-bold text-gray-800 mb-6">Популярні категорії</h2>
                     <x-category-tabs>
+                        No Caregories
                     </x-category-tabs>
                 </div>
             </div>
-
             <div class="mt-8 text-gray-900">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse ($restaurants as $restaurant)
-                        <x-post-item :restaurant="$restaurant" />
-                    @empty
-                        <div class="col-span-full">
-                            <p class="text-center text-gray-400 py-16">Закладів не знайдено.</p>
-                        </div>
-                    @endforelse
-                </div>
+                @forelse ($posts as $p)
+                <x-post-item :post="$p"></x-post-item>
+                @empty
+                    <div>
+                        <p class="text-center text-gray-400 py-16">No posts found.</p>
+                    </div>
+                @endforelse
             </div>
-            
+            {{ $posts->onEachSide(1)->links() }}
         </div>
     </div>
 </x-app-layout>

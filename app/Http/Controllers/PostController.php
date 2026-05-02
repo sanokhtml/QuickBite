@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Restaurant;
 use Str;
 
 class PostController extends Controller
@@ -17,33 +18,32 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $restaurants = \App\Models\Restaurant::with(['category', 'media'])->latest()->get();
 
-        $query = Post::with(['user','media'])
-            ->where('published_at', '<=', now())
-            ->withCount('claps')
-            ->latest();
-        if ($user) {
-            $ids = $user->following()->pluck("users.id");
-            $query->whereIn("user_id", $ids);
-        }
-        $posts = $query->simplePaginate(5);
         return view('post.index', [
-                'posts'=> $posts
-            ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $categories = Category::get();
-        return view('post.create',[
-            'categories'=> $categories,
+            'restaurants' => $restaurants
         ]);
     }
 
+    public function category(Category $category)
+    {
+
+        $restaurants = $category->restaurants()
+            ->with(['category', 'media'])
+            ->latest()
+            ->get();
+
+        return view('post.index', [
+            'restaurants' => $restaurants,
+            'currentCategory' => $category
+        ]);
+    }
+
+
+    public function create()
+    {
+        return redirect()->route('restaurant.create');
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -122,27 +122,6 @@ class PostController extends Controller
             $post->delete();
 
         return redirect()->route('dashboard');
-    }
-
-    public function category(Category $category)
-    {
-        $user = auth()->user();
-
-        $query = $category->posts()
-            ->where('published_at', '<=', now())
-            ->with(['user','media'])
-            ->withCount('claps')
-            ->latest();
-
-        if ($user) {
-            $ids = $user->following()->pluck("users.id");
-            $query->whereIn("user_id", $ids);
-        }
-        $posts = $query->simplePaginate(5);
-
-        return view('post.index', [
-            'posts'=> $posts,
-            ]);
     }
 
     public function myPosts()

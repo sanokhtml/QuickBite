@@ -7,11 +7,24 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ProductController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
+    Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('products.store');
+});
+
+Route::get('/restaurant/{restaurant:slug}', [RestaurantController::class, 'show'])
+    ->name('restaurant.show');
 
 Route::get('/@{user:username}', [PublicProfileController::class, 'show'])
     ->name('profile.show');

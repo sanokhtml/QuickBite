@@ -8,8 +8,8 @@
                     <div class="flex-1 pr-8">
                         <h1 class="text-4xl">{{ $user->name }}</h1>
                         <div class="mt-8">
-                            @forelse ($posts as $p)
-                            <x-post-item :post="$p"></x-post-item>
+                            @forelse ($restaurants as $r)
+                            <x-post-item :restaurant="$r"></x-post-item>
                             @empty
                                 <div>
                                     <p class="text-center text-gray-400 py-16">No posts found.</p>
