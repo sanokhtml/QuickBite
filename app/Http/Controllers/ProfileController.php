@@ -38,10 +38,10 @@ public function update(ProfileUpdateRequest $request): RedirectResponse
     }
 
     // Робота з аватаром через Spatie
-    if ($request->hasFile('image')) {
+    if ($request->hasFile('avatar')) {
         // Видаляємо старий аватар і додаємо новий
         $user->clearMediaCollection('avatars');
-        $user->addMediaFromRequest('image')->toMediaCollection('avatars');
+        $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
     }
 
     $user->save();

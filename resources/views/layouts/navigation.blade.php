@@ -4,13 +4,15 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                        <div class="shrink-0 flex items-center gap-3">
-                            <x-application-logo class="block h-10 w-auto" />
+            <a href="/">
+                <div class="shrink-0 flex items-center gap-3">
+                    <x-application-logo class="block h-10 w-auto" />
 
-                            <span class="text-3xl font-black tracking-tighter text-[#5F55F8] leading-none mt-1.5">
-                                QuickBite
-                            </span>
-                        </div>
+                    <span class="text-3xl font-black tracking-tighter text-[#5F55F8] leading-none mt-1.5">
+                        QuickBite
+                    </span>
+                </div>
+            </a>
 
             </div>
                         <div class="flex jcustify-center items-center gap-2">
@@ -54,10 +56,6 @@
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('profile.edit')">
                                     {{ __('Profile') }}
-                                </x-dropdown-link>
-
-                                <x-dropdown-link :href="route('myPosts')">
-                                    {{ __('My Posts') }}
                                 </x-dropdown-link>
 
                                 <!-- Authentication -->
