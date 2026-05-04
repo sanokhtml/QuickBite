@@ -1,12 +1,9 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
+            {{ __('Оновлення паролю') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
@@ -32,7 +29,9 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button class="bg-[#5F55F8] hover:bg-indigo-700 rounded-full py-3 px-10 font-bold transition ml-auto block">
+                {{ __('Зберегти зміни') }}
+            </x-primary-button>
 
             @if (session('status') === 'password-updated')
                 <p
