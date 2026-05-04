@@ -15,12 +15,17 @@ use App\Http\Controllers\ProductController;
 //     return view('welcome');
 // });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
+Route::middleware(['auth'])->group(function () {
     Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
 
-    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('products.store');
+});
+
+Route::middleware(['auth', 'can:admin'])->group(function () {
+    Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
+    Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+    Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
 });
 
 Route::get('/restaurant/{restaurant:slug}', [RestaurantController::class, 'show'])
@@ -41,7 +46,7 @@ Route::get('/@{user:username}', [PublicProfileController::class, 'show'])
     Route::get('/c/{category}', [PostController::class,'category'])
     ->name('post.byCategory');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/post/create', [PostController::class, 'create'])
     ->name('post.create');

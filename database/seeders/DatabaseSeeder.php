@@ -17,14 +17,16 @@ class DatabaseSeeder extends Seeder
      */
 public function run(): void
 {
-    // 1. Тестовий користувач
+    $this->call([
+            AdminUserSeeder::class,
+        ]);
+
     User::factory()->create([
         'name' => 'Test User',
         'username' => 'testuser',
         'email' => 'test@example.com',
     ]);
 
-    // 2. Створюємо основні категорії через цикл (автоматично генеруємо слаг)
     $categories = [
         'Фаст-фуд',
         'Піцца',
@@ -37,7 +39,7 @@ public function run(): void
     foreach ($categories as $name) {
         Category::create([
             'name' => $name,
-            'slug' => str($name)->slug(), // Це автоматично зробить "fast-fud" і т.д.
+            'slug' => str($name)->slug(),
         ]);
     }
 }

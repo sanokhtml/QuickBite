@@ -4,34 +4,32 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-            <div class="shrink-0 flex items-center gap-3">
-                <x-application-logo class="block h-10 w-auto" />
+                        <div class="shrink-0 flex items-center gap-3">
+                            <x-application-logo class="block h-10 w-auto" />
 
-                <span class="text-3xl font-black tracking-tighter text-[#5F55F8] leading-none mt-1.5">
-                    QuickBite
-                </span>
+                            <span class="text-3xl font-black tracking-tighter text-[#5F55F8] leading-none mt-1.5">
+                                QuickBite
+                            </span>
+                        </div>
+
             </div>
+                        <div class="flex jcustify-center items-center gap-2">
+                @can('admin')
+                    @if(auth()->user()->email === 'admin@quickbite.com')           
+                            <a href="{{ route('restaurant.create') }}" class="flex items-center">
+                                <x-primary-button>
+                                    Create Restaurant
+                                </x-primary-button>
+                            </a>
 
-            </div>
+                            <a href="{{ route('product.create') }}" class="flex items-center">
+                                <x-primary-button>
+                                    Create Product
+                                </x-primary-button>
+                            </a>
 
-            <div class="flex jcustify-center items-center gap-2">
-                <a href="{{ route('restaurant.create') }}" class="flex items-center">
-                    <x-primary-button>
-                        Create Restaurant
-                    </x-primary-button>
-                </a>
-
-                <a href="{{ route('product.create') }}" class="flex items-center">
-                    <x-primary-button>
-                        Create Product
-                    </x-primary-button>
-                </a>
-
-                <a href="{{ route('post.create') }}" class="flex items-center">
-                    <x-primary-button>
-                        Create Post
-                    </x-primary-button>
-                </a>
+                    @endif
+                @endcan
 
                 @auth
                     <!-- Settings Dropdown -->
