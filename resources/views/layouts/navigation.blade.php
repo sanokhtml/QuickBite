@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-            <a href="/">
+            <a href="/" class="flex items-center">
                 <div class="shrink-0 flex items-center gap-3">
                     <x-application-logo class="block h-10 w-auto" />
 
@@ -15,23 +15,22 @@
             </a>
 
             </div>
-                        <div class="flex jcustify-center items-center gap-2">
-                @can('admin')
-                    @if(auth()->user()->email === 'admin@quickbite.com')           
-                            <a href="{{ route('restaurant.create') }}" class="flex items-center">
+                <div class="flex justify-center items-center gap-2">
+                    @can('admin')
+                        @if(auth()->user()->email === 'admin@quickbite.com')           
+                            <a href="{{ route('restaurant.create') }}" class="hidden sm:flex items-center">
                                 <x-primary-button>
                                     Create Restaurant
                                 </x-primary-button>
                             </a>
 
-                            <a href="{{ route('product.create') }}" class="flex items-center">
+                            <a href="{{ route('product.create') }}" class="hidden sm:flex items-center">
                                 <x-primary-button>
                                     Create Product
                                 </x-primary-button>
                             </a>
-
-                    @endif
-                @endcan
+                        @endif
+                    @endcan
 
                 @auth
                     <!-- Settings Dropdown -->
@@ -107,10 +106,10 @@
         </div>
     </div>
 
-    @auth
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
 
+        @auth
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="px-4">
@@ -118,14 +117,24 @@
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
 
+                @can('admin')
+                @if(auth()->user()->email === 'admin@quickbite.com')
+                    <div class="mt-3 px-4 space-y-2">
+                        <a href="{{ route('restaurant.create') }}" class="w-full flex justify-center text-center py-2 bg-[#5F55F8] hover:bg-[#7A72F9] text-white font-bold rounded-lg transition duration-150">
+                            Create Restaurant
+                        </a>
+                        <a href="{{ route('product.create') }}" class="w-full flex justify-center text-center py-2 bg-[#5F55F8] hover:bg-[#7A72F9] text-white font-bold rounded-lg transition duration-150">
+                            Create Product
+                        </a>
+                    </div>
+                @endif
+            @endcan
+
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
-                    <x-dropdown-link :href="route('myPosts')">
-                        {{ __('My Posts') }}
-                    </x-dropdown-link>
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
@@ -138,6 +147,17 @@
                     </form>
                 </div>
             </div>
+            @endauth
+            @guest
+            <div class="pt-2 pb-3 space-y-1 border-t border-gray-200">
+                <x-responsive-nav-link :href="route('login')">
+                    {{ __('Log in') }}
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('register')" class="text-[#5F55F8] font-bold">
+                    {{ __('Create an Account') }}
+                </x-responsive-nav-link>
+            </div>
+        @endguest
         </div>
-    @endauth
 </nav>

@@ -50,4 +50,10 @@ public function store(Request $request)
     return redirect()->route('restaurant.show', $restaurant->slug)
                      ->with('success', 'Заклад успішно зареєстровано!');
 }
+public function destroy(Restaurant $restaurant)
+{
+    $restaurant->delete();
+
+    return redirect()->route('dashboard')->with('success', 'Заклад успішно видалено!');
+}
 }

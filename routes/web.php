@@ -25,6 +25,8 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
     Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
     Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurant.create');
+    Route::delete('/restaurant/{restaurant}', [RestaurantController::class, 'destroy'])->name('restaurant.destroy');
+    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
 });
 

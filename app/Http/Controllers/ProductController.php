@@ -25,9 +25,14 @@ public function store(StoreProductRequest $request)
         $product->addMediaFromRequest('image')->toMediaCollection('images');
     }
 
-    // Варіант А: Перевантажити зв'язок перед використанням
     $product->load('restaurant'); 
 
     return redirect()->route('restaurant.show', $product->restaurant->slug);
+}
+public function destroy(Product $product)
+{
+    $restaurantSlug = $product->restaurant->slug;
+    $product->delete();
+    return redirect()->route('restaurant.show', $restaurantSlug);
 }
 }
