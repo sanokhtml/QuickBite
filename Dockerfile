@@ -33,4 +33,4 @@ COPY .docker/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
-CMD php artisan migrate:fresh --seed --force && php-fpm -D && nginx -g "daemon off;"
+CMD php artisan storage:link --force && php artisan migrate:fresh --seed --force && php-fpm -D && nginx -g "daemon off;"
