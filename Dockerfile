@@ -7,10 +7,14 @@ RUN apk update && apk add --no-cache \
     libxml2-dev \
     sqlite-dev \
     nodejs \
-    npm
+    npm \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev
 
-# Встановлення PHP розширень
-RUN docker-php-ext-install pdo pdo_sqlite bcmath xml
+# Встановлення PHP розширень (додали gd та exif)
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_sqlite bcmath xml gd exif
 
 # Встановлення Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
