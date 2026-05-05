@@ -21,11 +21,11 @@ public function run(): void
             AdminUserSeeder::class,
         ]);
 
-    User::factory()->create([
-        'name' => 'Test User',
-        'username' => 'testuser',
-        'email' => 'test@example.com',
-    ]);
+    // User::factory()->create([
+    //     'name' => 'Test User',
+    //     'username' => 'testuser',
+    //     'email' => 'test@example.com',
+    // ]);
 
     $categories = [
         'Фаст-фуд',
